@@ -1,0 +1,165 @@
+#include "BigInteger.h"
+
+BigInteger::BigInteger() {
+    size = 1;
+    for(int i=0;i<200;i++) data[i] = 0;
+}
+
+BigInteger::BigInteger(int num) {
+    size=0;
+    while(num!=0) {
+        data[size] = num%10;
+        num/=10;
+        size++;
+    }
+    if(size==0) size=1;
+}
+BigInteger::BigInteger(const BigInteger &other) {
+    size = other.size;
+    for(int i=0;i<size;i++) data[i] = other.data[i];
+}
+
+const BigInteger& BigInteger::operator+(const BigInteger &other) {
+    int newSize = std::max(this->size, other.size)+1;
+    for(int i=0;i<newSize;i++) {
+        data[i]+=other.data[i];
+        data[i+1]+=data[i]/10;
+        data[i]%=10;
+    }
+    if(data[newSize-1]==0) size = newSize-1;
+    return other;
+}
+
+const int& BigInteger::operator+(const int &other) {
+    int newSize=0, oth = other;
+    for(int i=0;oth!=0;i++) {
+        data[i]+=oth%10;
+        oth/=10;
+        data[i+1]+=data[i]/10;
+        data[i]%=10;
+        newSize++;
+    }
+    size=std::max(size, newSize);
+    return other;
+}
+
+const BigInteger& BigInteger::operator-(const BigInteger &other) {
+    BigInteger z;
+    for (int ix = 0; ix < (size - 1); ix++) { // проход по всем разрядам числа, начиная с последнего, не доходя до первого
+        if (ix < (size - 1)) { // если текущий разряд чисел не первый
+            data[ix + 1]--; // в следующуем разряде большего числа занимаем 1.
+            z.data[ix] += 10 + data[ix]; // в ответ записываем сумму значения текущего разряда большего числа и 10-ти
+        } else  // если текущий разряд чисел - первый
+                z[ix] += data[ix]; // в ответ суммируем значение текущего разряда большего числа
+        z.data[ix] -= other.data[ix]; // вычитаем значение текущего разряда меньшего числа
+ 
+        if (z.data[ix] / 10 > 0) { // если значение в текущем разряде двухразрядное
+            z.data[ix + 1]++; // переносим единицу в старший разряд
+            z.data[ix] %= 10; // в текущем разряде отсекаем ее
+        }
+    }
+    z.size = 200;
+    for(int i=0;z.data[i]==0;i--, z.size--)
+    return z;
+}
+
+const int& BigInteger::operator-(const int &other) {
+    BigInteger b(other);
+    return (*this)-b;
+}
+
+bool BigInteger::operator>(const BigInteger &other) {
+    if(size>other.size) return true;
+    if(size<other.size) return false;
+    int equals = 0;
+    for(int i=size-1;i>=0;i--) {
+        if(data[i]<other.data[i]) return false;
+        equals+=(data[i]==other.data[i]);
+    }
+    if(equals==size) return false;
+    return true;
+}
+
+bool BigInteger::operator>(const int &other) {
+    BigInteger b(other);
+    return (*this)>b;
+}
+
+bool BigInteger::operator<(const BigInteger &other) {
+    if(size<other.size) return true;
+    if(size>other.size) return false;
+    int equals = 0;
+    for(int i=size-1;i>=0;i--) {
+        if(data[i]>other.data[i]) return false;
+        equals+=(data[i]==other.data[i]);
+    }
+    if(equals==size) return false;
+    return true;
+}
+
+bool BigInteger::operator<(const int &other) {
+    BigInteger b(other);
+    return (*this)<b;
+}
+
+bool BigInteger::operator>=(const BigInteger &other) {
+    if(size>other.size) return true;
+    if(size<other.size) return false;
+    for(int i=size-1;i>=0;i--) {
+        if(data[i]<other.data[i]) return false;
+    }
+    return true;
+}
+
+bool BigInteger::operator>=(const int &other) {
+    BigInteger b(other);
+    return (*this)>=b;
+}
+
+bool BigInteger::operator<=(const BigInteger &other) {
+    if(size>other.size) return true;
+    if(size<other.size) return false;
+    for(int i=size-1;i>=0;i--) {
+        if(data[i]>other.data[i]) return false;
+    }
+    return true;
+}
+
+bool BigInteger::operator<=(const int &other) {
+    int oth = other;
+    for(int i=0;oth!=0;i++) {
+        if(size>i+1) return false;
+        if(data[i]!=oth%10) return false;
+        oth/=10;
+    }
+    return true;
+}
+
+bool BigInteger::operator==(const BigInteger &other) {
+    if(size!=other.size) return false;
+    for(int i=size-1;i>=0;i--) {
+        if(data[i]!=other.data[i]) return false;
+    }
+    return true;
+}
+
+bool BigInteger::operator==(const int &other) {
+    int oth = other;
+    int i = 0;
+    while(oth!=0) {
+        if(data[i]!=oth%10) return false;
+        oth/=10;
+        i++;
+    }
+
+    return true;
+}
+
+
+std::string BigInteger::getAsString() {
+    std::ostringstream sstream;
+    for(int i=0;i<size;i++) {
+        sstream << data[i];
+    }
+    return sstream.str();
+}

@@ -1,0 +1,25 @@
+#ifndef SAVELOADER_H
+#define SAVELOADER_H
+
+#include <fstream>
+#include <string>
+
+#include "Building.h"
+#include "GameState.h"
+
+class SaveLoader {
+    public:
+        SaveLoader();
+        ~SaveLoader();
+        GameState loadGame();
+        int* getUpgradeTypesArray();
+        void saveGame();
+        void encode();
+    private:
+        std::ifstream *saveReaderStream;
+        std::ofstream *saveWriterStream;
+        GameState gameState;
+        int upgradeTypes[GameState::UPGRADES_COUNT];
+};
+
+#endif

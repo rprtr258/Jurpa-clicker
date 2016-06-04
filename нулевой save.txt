@@ -1,0 +1,16 @@
+0 0 0 1
+0 50 4 images\build_1.png
+0 322 2 images\build_2.png
+0 3228 7 images\build_3.png
+0 55555 812 images\build_4.png
+0 5486 64 images\build_5.png
+0 8590 52 images\build_6.png
+0 6551 44 images\build_7.png
+0 4477 68 images\build_8.png
+0 3598 79 images\build_9.png
+0 5635 89 images\build_10.png
+0 5815 70 images\build_11.png
+0 7743 37 images\build_12.png
+0 7120 83 images\build_13.png
+1 7777
+2 33288
