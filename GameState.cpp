@@ -1,7 +1,7 @@
 #include "GameState.h"
 
 GameState::GameState() {
-    upgradesCost = new int(UPGRADES_COUNT);
+    upgradesCost = new int[UPGRADES_COUNT];
 }
 
 GameState::~GameState() {

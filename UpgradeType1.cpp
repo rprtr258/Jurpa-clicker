@@ -1,5 +1,7 @@
 #include "UpgradeType1.h"
+
 bool isClickedOnSprite(sf::Sprite &sprite, const sf::RenderWindow &window);
+
 UpgradeType1::UpgradeType1() {
 }
 
@@ -28,7 +30,7 @@ int UpgradeType1::getCost() {
 }
 
 void UpgradeType1::setCost(int newCost) {
-    this->cost=newCost;
+    this->cost = newCost;
     setPopup();
 }
 

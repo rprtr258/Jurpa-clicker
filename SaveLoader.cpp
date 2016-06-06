@@ -30,7 +30,7 @@ GameState& SaveLoader::loadGame() {
         std::getline((*saveReaderStream),textureFileTemp);
         buildingsInfo.addNewBuilding(costTemp, ownedTemp, gainTemp, textureFileTemp);
     }
-    for (int i=0;i<UPGRADES_COUNT;i++) {
+    for (int i = 0;i < UPGRADES_COUNT;i++) {
         int tempUpgradeCost;
         (*saveReaderStream) >> tempUpgradeCost;
         gameState.getUpgradesCostArray()[i] = tempUpgradeCost;
@@ -52,7 +52,7 @@ void SaveLoader::saveGame() {
         gameState.getBuildingsArray().getBuilding(i).getGain()  << ' ' <<
         gameState.getBuildingsArray().getBuilding(i).getFile()  << std::endl;
     }
-    for (int i=0;i<UPGRADES_COUNT;i++) {
+    for (int i = 0;i < UPGRADES_COUNT;i++) {
         (*saveWriterStream) << gameState.getUpgradesCostArray()[i] << std::endl;
     }
     saveWriterStream->close();
@@ -65,14 +65,14 @@ void SaveLoader::encode() {
     int k = 0;
     char s[500];
     while(!in.eof()) {
-        c=in.get();
-        s[k]=c;
+        c = in.get();
+        s[k] = c;
         k++;
     }
     in.close();
-
+    k--;
     std::ofstream out("save.txt");
-    for(int i=0;i<k-1;i++) {
+    for(int i = 0;i < k;i++) {
         out.put((char)~s[i]);
     }
     out.close();

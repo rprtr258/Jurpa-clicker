@@ -9,7 +9,6 @@
 #include "InfoPopup.h"
 #include "GameState.h"
 #include "GameConstants.h"
-//#include "Util.h"
 
 class UpgradeType1 {
     public:

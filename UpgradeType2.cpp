@@ -1,5 +1,7 @@
 #include "UpgradeType2.h"
+
 bool isClickedOnSprite(sf::Sprite &sprite, const sf::RenderWindow &window);
+
 UpgradeType2::UpgradeType2() {
 }
 
