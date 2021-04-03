@@ -1,7 +1,0 @@
-#ifndef GAMECONSTANTS_H_INCLUDED
-#define GAMECONSTANTS_H_INCLUDED
-
-const int BUILDS_COUNT = 13;
-const int UPGRADES_COUNT = 2;
-
-#endif

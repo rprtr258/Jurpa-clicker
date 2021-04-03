@@ -1,18 +1,5 @@
-# Compiled Object files
-*.o
+# Ignore Gradle project-specific cache directory
+.gradle
 
-# Compiled Dynamic libraries
-*.dll
-
-# Compiled Static libraries
-*.a
-*.lib
-
-# Executables
-*.exe
-
-# Source file
-*.cpp
-
-# Images
-*.png
+# Ignore Gradle build output directory
+build
